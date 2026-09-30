@@ -88,7 +88,7 @@ Nepíšu skripty jen pro efekt; stavím odolné a robustní systémy navržené 
 | **Sítě & Topologie:** | Tailscale (WireGuard mesh), SSH automatizace, PipeWire / PulseAudio |
 | **Jazyky & Ekosystém:** | Python (uv, Textual, FastAPI), Node.js, Shell skripty, Git, GitHub Actions |
 | **AI & Inference:** | `llama.cpp` (NVIDIA CUDA offload), Model Context Protocol (MCP), Pi, Codex, AGY |
-| **Uzly v síti:** | [Kompletní architektura flotily](./docs/hardware-fleet.cz.md) & [`data/hardware-fleet.json`](./data/hardware-fleet.json) — MILHY-PC (i5/GTX 1060), HAS (Alpine/vestavěná UPS), OptiPlex (úložiště/Coder NAS), Acer AIO, RPi TV |
+| **Uzly v síti:** | [Kompletní architektura flotily](./docs/hardware-fleet.cz.md) & [`data/hardware-fleet.json`](./data/hardware-fleet.json) — MILHY-PC (i5/GTX 1060), HAS (Compaq Presario CQ57 / AMD E-300 / vestavěná UPS / Debian 13), OptiPlex (úložiště/Coder NAS), Acer AIO, RPi TV |
 
 ---
 *Vytvořeno s důrazem na GitOps disciplínu — Kontakt: [GitHub Profil](https://github.com/milhy545)*

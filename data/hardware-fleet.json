@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "updated": "2026-09-30",
+    "owner": "Stanislav 'Milhy' Muller",
+    "philosophy": "3xR: Reuse, Refix, Recycle — Squeeze Every Cycle",
+    "network_mesh": "Tailscale First (WireGuard mesh) + Private LAN (192.168.0.x)"
+  },
+  "nodes": [
+    {
+      "id": "milhy-pc",
+      "name": "MILHY-PC",
+      "role": "Primary Workstation & Local AI Inference Node",
+      "specs": {
+        "cpu": "Intel Core i5-4690K (4 cores @ 3.50GHz - 3.90GHz)",
+        "ram": "32 GB DDR3",
+        "gpu": "NVIDIA GeForce GTX 1060 6GB Dual (GP106 Pascal) + Intel HD Graphics 4600",
+        "storage": "SSD + HDD hybrid storage",
+        "os": "MX Linux 25 (Debian 13 Trixie base, Linux 6.12 kernel, KDE Wayland)"
+      },
+      "gpu_topology": {
+        "desktop_display": "Intel HD Graphics 4600 (i915 driver)",
+        "compute_acceleration": "NVIDIA GTX 1060 6GB (Debian proprietary driver 550.163, APT pinned, nouveau blacklisted)",
+        "vram_orchestration": "Custom steam-gpu-wrap / vram-proton dynamic switcher (stops llama.service, frees 5.4GB VRAM for gaming, restores AI on exit)"
+      },
+      "workloads": [
+        "Vibe Coding daily driver (Pi CLI, Codex CLI, Claude Code CLI)",
+        "Docker container development",
+        "Local LLM inference via llama.cpp / llama-server (Mistral / Qwen 7B GGUF)",
+        "Windows 11 VM (QEMU/KVM) for Codex Desktop & Perplexity Comet"
+      ]
+    },
+    {
+      "id": "has",
+      "name": "HAS (Home Automation Server)",
+      "role": "Central Automation Hub & MCP Orchestration Node",
+      "chassis_type": "Repurposed headless laptop (internal battery serves as zero-latency built-in UPS)",
+      "specs": {
+        "cpu": "Multi-core Mobile x86_64",
+        "ram": "8 GB RAM",
+        "storage": "SATA SSD",
+        "os": "Alpine Linux (hardened, minimal memory footprint)"
+      },
+      "networking": {
+        "local_ip": "192.168.0.x",
+        "tailscale": "Tailscale Mesh + Tailscale Funnel (secure zero-trust gateway for MCP endpoints)"
+      },
+      "workloads": [
+        "24 Docker containers managed via Portainer & Docker Compose",
+        "Home Assistant (Core IoT automation)",
+        "Mosquitto MQTT Broker",
+        "AdGuard Home (Network-wide DNS & ad-blocking)",
+        "Mega-Orchestrator MCP cluster (filesystem, git, terminal, db, memory, qdrant vector backend, marketplace)"
+      ]
+    },
+    {
+      "id": "optiplex",
+      "name": "OptiPlex (formerly nicknamed LLMS)",
+      "role": "Central Storage Cloud (Nextcloud), Coder Backend & Network Backup",
+      "chassis_type": "Dell OptiPlex Desktop",
+      "specs": {
+        "cpu": "Intel Core 2 Quad Q9550 (4 cores, 12MB L2 cache, 2.83GHz)",
+        "ram": "16 GB DDR2/DDR3",
+        "storage": "256 GB SSD (OS root) + 3 TB HDD (dedicated 'Backup' partition via Samba / SSH)",
+        "os": "Debian-based (MX Linux / pure Debian Headless Docker Host)"
+      },
+      "networking": {
+        "local_ip": "192.168.0.41",
+        "tailscale": "Tailscale static node"
+      },
+      "hardware_reality_lesson": {
+        "no_avx_limitation": "Core 2 Quad Q9550 lacks AVX / AVX2 instruction sets. Running modern LLM inference or heavy vector math results in instruction faults or severe performance cliff. Nickname 'LLMS' was an experimental artifact.",
+        "architectural_pivot": "Repurposed strictly as high-capacity NAS, Nextcloud repository, network backup server, and remote Coder container environment. Strict policy banning AVX-dependent workloads."
+      },
+      "workloads": [
+        "Nextcloud storage hub for lab files and personal documents",
+        "Coder server (browser-accessible dev containers)",
+        "Samba network storage share",
+        "Automated backup target for workstations"
+      ]
+    },
+    {
+      "id": "acer-aio",
+      "name": "Acer Aspire Z5610 AIO (2010 Relic)",
+      "role": "Bedside Media Center, Streaming TV & Ambient Status Terminal",
+      "chassis_type": "23-inch All-in-One PC (2009/2010 vintage)",
+      "specs": {
+        "cpu": "Intel Core 2 Quad Q9550 / E8400 upgraded silicon",
+        "ram": "8 GB DDR3",
+        "storage": "SATA SSD",
+        "os": "Lightweight Linux (antiX / MX Linux)"
+      },
+      "thermal_engineering": {
+        "problem": "Upgraded desktop CPU caused severe thermal saturation in compact AIO chassis, hitting 82°C thermal shutdown.",
+        "solution": "Custom Linux PowerManagement suite interfacing directly with CPU MSR (Model-Specific Registers) for dynamic frequency stepping and aggressive PWM fan curves."
+      },
+      "workloads": [
+        "Bedside streaming media playback (MPV / Kodi / browser)",
+        "Ambient system status dashboard & system telemetry"
+      ]
+    },
+    {
+      "id": "rpi-tv",
+      "name": "Raspberry Pi Dumb TV Dashboard",
+      "role": "Low-Power Media Player, WebRTC Streamer & TV TUI",
+      "specs": {
+        "cpu": "Quad-core ARM Cortex-A72 / A53 (Raspberry Pi)",
+        "ram": "Low-RAM constraint (1GB - 2GB)",
+        "os": "Raspberry Pi OS Lite"
+      },
+      "kernel_tuning": {
+        "core_0": "Isolated for network stack, Wi-Fi, and Bluetooth IRQ noise",
+        "core_3": "Locked for ALSA audio stack to eliminate dropouts and buffer underruns",
+        "cores_1_2": "Dedicated to MPV media engine with dynamic 160% burst scheduling"
+      },
+      "workloads": [
+        "Python Textual TUI dashboard",
+        "FastAPI WebUI / WebSocket terminal (port 8099)",
+        "go2rtc WebRTC / RTSP low-latency camera streaming",
+        "keys2mpv hardware multimedia key bridge"
+      ]
+    },
+    {
+      "id": "mobile-edge",
+      "name": "Travel Rig / Mobile Edge",
+      "role": "Portable Offline Terminal & Edge Compute",
+      "specs": {
+        "compute_node": "Realme 8 5G (Android Linux kernel / Termux server mode)",
+        "terminal_node": "Intel Atom N270 Netbook (keyboard & display client)",
+        "interconnect": "Direct USB Tethering (RNDIS) forming a private offline 192.168.42.x subnet"
+      },
+      "philosophy": "Zero-dependency mobile computing node capable of running diagnostics and shell tools anywhere without internet access."
+    }
+  ]
+}

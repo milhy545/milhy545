@@ -4,7 +4,8 @@
     "updated": "2026-09-30",
     "owner": "Stanislav 'Milhy' Muller",
     "philosophy": "3xR: Reuse, Refix, Recycle — Squeeze Every Cycle",
-    "network_mesh": "Tailscale First (WireGuard mesh) + Private LAN (192.168.0.x)"
+    "network_mesh": "Tailscale First (WireGuard mesh) + Private LAN (192.168.0.x)",
+    "total_active_nodes": 5
   },
   "nodes": [
     {
@@ -33,24 +34,27 @@
     {
       "id": "has",
       "name": "HAS (Home Automation Server)",
-      "role": "Central Automation Hub & MCP Orchestration Node",
-      "chassis_type": "Repurposed headless laptop (internal battery serves as zero-latency built-in UPS)",
+      "role": "Central Automation Hub & Mega-Orchestrator MCP Gateway",
+      "chassis_type": "Compaq Presario CQ57 Notebook PC (internal battery serves as zero-cost hardware UPS)",
       "specs": {
-        "cpu": "Multi-core Mobile x86_64",
-        "ram": "8 GB RAM",
-        "storage": "SATA SSD",
-        "os": "Alpine Linux (hardened, minimal memory footprint)"
+        "model": "Compaq Presario CQ57 Notebook PC (Hewlett-Packard)",
+        "cpu": "AMD E-300 APU with Radeon HD Graphics (2 cores @ 1.30 GHz)",
+        "ram": "4 GB DDR3",
+        "storage": "240 GB SSD (root system & Docker persistent volumes)",
+        "os": "Debian GNU/Linux 13 (trixie, kernel 6.12)"
       },
       "networking": {
-        "local_ip": "192.168.0.x",
-        "tailscale": "Tailscale Mesh + Tailscale Funnel (secure zero-trust gateway for MCP endpoints)"
+        "local_ip": "192.168.0.58 (LAN SSH: 2222)",
+        "tailscale": "100.90.137.86 (SSH: 22) + Tailscale Funnel"
       },
       "workloads": [
-        "24 Docker containers managed via Portainer & Docker Compose",
-        "Home Assistant (Core IoT automation)",
+        "25 Docker microservices managed via Docker Compose",
+        "Home Assistant (ghcr.io/home-assistant/home-assistant:stable, port 10002 -> 8123)",
         "Mosquitto MQTT Broker",
-        "AdGuard Home (Network-wide DNS & ad-blocking)",
-        "Mega-Orchestrator MCP cluster (filesystem, git, terminal, db, memory, qdrant vector backend, marketplace)"
+        "Mega-Orchestrator MCP Gateway (port 7000) & Security Gateway (port 7080)",
+        "Core MCP Microservices: Filesystem (7001), Git (7002), Terminal (7003), Database (7004), Memory (7005), Security (7008), Config (7009), Log (7010), Vector Memory (7012), FORAI (7016), Vault (7070), Marketplace (7034)",
+        "Data Layer: PostgreSQL 15 (7021), Redis 7 (7022), Qdrant vector backend (7026)",
+        "Observability & Ingestion: Grafana (7031), Promtail log collector"
       ]
     },
     {
@@ -119,17 +123,6 @@
         "go2rtc WebRTC / RTSP low-latency camera streaming",
         "keys2mpv hardware multimedia key bridge"
       ]
-    },
-    {
-      "id": "mobile-edge",
-      "name": "Travel Rig / Mobile Edge",
-      "role": "Portable Offline Terminal & Edge Compute",
-      "specs": {
-        "compute_node": "Realme 8 5G (Android Linux kernel / Termux server mode)",
-        "terminal_node": "Intel Atom N270 Netbook (keyboard & display client)",
-        "interconnect": "Direct USB Tethering (RNDIS) forming a private offline 192.168.42.x subnet"
-      },
-      "philosophy": "Zero-dependency mobile computing node capable of running diagnostics and shell tools anywhere without internet access."
     }
   ]
 }

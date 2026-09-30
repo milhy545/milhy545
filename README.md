@@ -88,7 +88,7 @@ I don't just write scripts; I build robust, fault-tolerant systems designed to w
 | **Networking & Mesh:** | Tailscale (WireGuard mesh), SSH automation, PipeWire / PulseAudio |
 | **Languages & Tooling:** | Python (uv, Textual, FastAPI), Node.js, Shell, Git, GitHub Actions |
 | **AI & Inference:** | `llama.cpp` (NVIDIA CUDA offload), Model Context Protocol (MCP), Pi, Codex, AGY |
-| **Hardware Nodes:** | [Architecture Deep-Dive](./docs/hardware-fleet.md) & [`data/hardware-fleet.json`](./data/hardware-fleet.json) — MILHY-PC (i5/GTX 1060), HAS (Alpine/Built-in UPS), OptiPlex (Storage/Coder NAS), Acer AIO, RPi TV |
+| **Hardware Nodes:** | [Architecture Deep-Dive](./docs/hardware-fleet.md) & [`data/hardware-fleet.json`](./data/hardware-fleet.json) — MILHY-PC (i5/GTX 1060), HAS (Compaq Presario CQ57 / AMD E-300 / Built-in UPS / Debian 13), OptiPlex (Storage/Coder NAS), Acer AIO, RPi TV |
 
 ---
 *Generated with automated GitOps discipline — Contact: [GitHub Profile](https://github.com/milhy545)*

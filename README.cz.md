@@ -74,7 +74,7 @@ Nepíšu skripty jen pro efekt; stavím odolné a robustní systémy navržené 
 - **Dokumentace:** [Anglický README](https://github.com/milhy545/Unification/blob/main/README.md) | [Česká dokumentace](https://github.com/milhy545/Unification/blob/main/README.cz.md) | [Kronika SSH pekla (EN)](https://github.com/milhy545/Unification/blob/main/docs/stories/ssh-hell-chronicle-en.md)
 
 ### 💡 Inženýrský obrat: MyCoder ➔ `pi`
-- **Architektonická lekce:** Původně jsem vyvíjel vlastní kódovací CLI (`MyCoder`). Ve chvíli, kdy vyšel open-source nástroj `pi` (`p-coding-agent`), který byl modulární, lehký a dělal přesně to samé bez zbytečného balastu, jsem vývoj MyCoderu okamžitě ukončil.
+- **Architektonická lekce:** Přúvodně jsem vyvíjel vlastní kódovací CLI (`MyCoder`). Ve chvíli, kdy vyšel open-source nástroj `pi` (`p-coding-agent`), který byl modulární, lehký a dělal přesně to samé bez zbytečného balastu, jsem vývoj MyCoderu okamžitě ukončil.
 - **Seniorní přístup:** Skutečný inženýr neztrácí čas vymýšlením kola, když existuje vynikající open-source nástroj, který vyřeší problém lépe.
 
 ---
@@ -88,7 +88,7 @@ Nepíšu skripty jen pro efekt; stavím odolné a robustní systémy navržené 
 | **Sítě & Topologie:** | Tailscale (WireGuard mesh), SSH automatizace, PipeWire / PulseAudio |
 | **Jazyky & Ekosystém:** | Python (uv, Textual, FastAPI), Node.js, Shell skripty, Git, GitHub Actions |
 | **AI & Inference:** | `llama.cpp` (NVIDIA CUDA offload), Model Context Protocol (MCP), Pi, Codex, AGY |
-| **Uzly v síti:** | Workstation (i5-4690K, GTX 1060 6GB), HAS MCP Node, Bedside Media Node, RPi TV |
+| **Uzly v síti:** | [Kompletní architektura flotily](./docs/hardware-fleet.cz.md) & [`data/hardware-fleet.json`](./data/hardware-fleet.json) — MILHY-PC (i5/GTX 1060), HAS (Alpine/vestavěná UPS), OptiPlex (úložiště/Coder NAS), Acer AIO, RPi TV |
 
 ---
 *Vytvořeno s důrazem na GitOps disciplínu — Kontakt: [GitHub Profil](https://github.com/milhy545)*
